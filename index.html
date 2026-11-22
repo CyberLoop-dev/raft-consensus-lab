@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0b1220"><title>Raft Consensus Lab</title>
+<style>
+:root{color-scheme:dark;--bg:#0b1220;--panel:#121e30;--line:#26364b;--muted:#9fb0c6;--text:#edf5ff;--teal:#5eead4;--amber:#fbbf24;--blue:#7dd3fc}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 15% 0,#15314a 0,transparent 36%),var(--bg);color:var(--text);font:15px/1.5 system-ui,sans-serif}
+main{max-width:1120px;margin:auto;padding:34px 20px 60px}.top{display:flex;justify-content:space-between;gap:18px;align-items:center;flex-wrap:wrap}
+h1{font-size:clamp(2rem,5vw,3.4rem);letter-spacing:-.05em;margin:0}.sub{color:var(--muted);max-width:650px;margin:8px 0 0}
+.controls{display:flex;gap:9px;flex-wrap:wrap;margin:26px 0}button{border:1px solid var(--line);background:#1a2a40;color:var(--text);padding:10px 15px;border-radius:12px;font-weight:650;cursor:pointer}button.primary{background:var(--teal);color:#06211e;border-color:transparent}button:hover{filter:brightness(1.12)}
+.layout{display:grid;grid-template-columns:2fr 1fr;gap:16px}.panel{background:linear-gradient(145deg,#142238,#101a2a);border:1px solid var(--line);border-radius:18px;padding:18px;box-shadow:0 18px 50px #0003}.panel h2{font-size:1rem;margin:0 0 15px;color:#d7e7f7}
+.nodes{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px}.node{padding:14px 10px;border:1px solid var(--line);border-radius:14px;background:#0d1726;text-align:center;min-height:138px}.node.leader{border-color:var(--teal);box-shadow:0 0 0 1px #5eead455,0 0 25px #5eead422}.node .id{font-size:1.35rem;font-weight:800}.role{font-size:.78rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted)}.node.leader .role{color:var(--teal)}.term{margin-top:8px;color:var(--blue);font-size:.86rem}.log{margin-top:7px;color:var(--muted);font-size:.78rem}
+.stat{display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid #26364b}.stat:last-child{border:0}.stat span:last-child{font-variant-numeric:tabular-nums;color:var(--teal);font-weight:700}.events{max-height:360px;overflow:auto;display:flex;flex-direction:column;gap:8px}.event{background:#0c1726;border:1px solid #23334a;border-radius:10px;padding:9px 11px;color:#c6d5e6;font-size:.86rem}.hint{color:var(--muted);font-size:.82rem;margin-top:15px}
+@media(max-width:760px){.layout{grid-template-columns:1fr}.nodes{grid-template-columns:repeat(2,minmax(0,1fr))}}
+</style></head>
+<body><main>
+<div class="top"><div><h1>Raft <span style="color:var(--teal)">Consensus</span> Lab</h1><p class="sub">A deterministic teaching model of leader election, heartbeats, and replicated logs. Advance one logical tick at a time.</p></div><div class="panel"><div class="stat"><span>Logical time</span><span id="clock">0</span></div><div class="stat"><span>Current term</span><span id="term">0</span></div><div class="stat"><span>Leader</span><span id="leader">None</span></div></div></div>
+<div class="controls"><button class="primary" id="tick">Tick +1</button><button id="append">Append command</button><button id="reset">Reset simulation</button></div>
+<div class="layout"><section class="panel"><h2>🧩 Cluster nodes</h2><div class="nodes" id="nodes"></div><p class="hint">This compact model demonstrates the happy path only. It does not simulate partitions, randomized timeouts, or production Raft safety rules.</p></section><section class="panel"><h2>📡 Event history</h2><div class="events" id="events"></div></section></div>
+</main><script src="/app.js"></script></body></html>
